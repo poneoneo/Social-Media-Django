@@ -24,14 +24,14 @@ def signup(request):
                 data = {"info":info}
                 messages.info(
                     request,
-                    f"Un nom d'utilisateur est deja enregistrer avec cette email {info.status_code} ",
+                    f"Un nom d'utilisateur est deja enregistrer avec cette email  ",
                 )
-                return redirect("core:signup")
+                return redirect("/signup")
 
             elif User.objects.filter(username=username).exists():
                 info = HttpResponse(status = 401).status_code
-                messages.info(request, f"Ce nom d'utilisateur existe deja {info}")
-                return redirect("core:signup")
+                messages.info(request, f"Ce nom d'utilisateur existe deja ")
+                return redirect("/signup")
                 
             else:
                 user = User.objects.create_user(
@@ -44,17 +44,23 @@ def signup(request):
                 new_profile = Profile.objects.create(user = user_model, id_user = user_model.id )
                 new_profile.save()
         
-                messages.info(request, f"Sign up with successe ! 🔥" )
+                messages.info(request, f"Inscription valide connectez-vous 😉 ! 🔥" )
 
-                return redirect("core:signin")
+                return redirect("/signin")
                 
         else:
-            info = HttpResponse(status = 401).status_code
+            
             messages.info(request, "Les mots de passes ne sont pas identiques")
-            return redirect("core:signup")
+            return redirect("/signup")
             
     else:
-        return render(request, "signup.html")
+        return render(request, "core/signup.html")
+
+@login_required(login_url="core:signin")
+def settings(request):
+    # username = request
+    # logged_user = Profile.objects.get()
+    return render(request, template_name = "core/setting.html")
 
 def signin(request):
     if request.method == "POST":
@@ -64,13 +70,14 @@ def signin(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None :
             auth.login(request, user=user)
-            return redirect("/")
+            
+            return redirect("/settings")
         else:
             messages.info(request, "Mot de passe ou nom d'utilisateur incorrecte !")
-            return redirect("core:signin")
+            return redirect("/signin")
     
     else:
-        return render(request, "signin.html")
+        return render(request, "core/signin.html")
 
 @login_required(login_url="core:signin")
 def logout(request):

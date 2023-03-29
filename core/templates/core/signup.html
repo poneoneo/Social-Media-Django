@@ -1,0 +1,59 @@
+{% extends 'signup.html' %}
+{% load static %}
+
+
+{% block content %}
+<div>
+    <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
+        <h1 class="lg:text-3xl text-xl font-semibold mb-6">S'inscrire</h1>
+        <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->
+        <div>
+            <style> 
+                .bad {
+                    color:red;
+                }
+            </style>
+            {% for message in messages %}
+                <h5 class="bad">{{ message }}</h5>
+            {% endfor %}
+            
+        </div>
+        
+        
+        <form action="", method = "POST">
+        {% csrf_token %}
+            <!--<div class="flex lg:flex-row flex-col lg:space-x-2">
+                <input type="text" placeholder="First Name"  class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                <input type="text" placeholder="Last Name" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+            </div>-->
+            <input type="text" name = "username" placeholder="Nom d'utilisateur" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+            <input type="email" name = "email" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+            <input type="password" name = "password" placeholder="Mot de passe" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+            <input type="password" name = "password2" placeholder="Confirmer le mot de passe" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+{% comment %} <div class="flex justify-start my-4 space-x-1">
+<div class="checkbox">
+<input type="checkbox" id="chekcbox1" checked>
+<label for="chekcbox1"><span class="checkbox-icon"></span> J'accepte</label>
+</div>
+<a href="#"> Les Termes et Conditions </a>
+</div> {% endcomment %}
+            <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Je M'inscris</button>
+            <div class="text-center mt-5 space-x-2">
+                <p class="text-base"> Deja inscris ? <a href="/signin">Connectez-vous ici !</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
