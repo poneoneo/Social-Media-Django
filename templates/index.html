@@ -7,8 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="favicon.png" rel="icon" type="image/png">
-    <title>Home</title>
+    <link href="images/favicon.png" rel="shortcut icon" type="image/png">
+    <title>Acceuille</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
@@ -171,7 +171,7 @@
                         </a>
                         <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                             <ul>
-                                <li><a href="setting.html"> Parametre du Compte </a> </li>
+                                <li><a href="{% url 'core:settings' %}"> Parametre du Compte </a> </li>
                                 <li><a href="explore.html">Explorer </a> </li>
                                 <li><a href="#"> Aide </a> </li>
                                 <li><a href="{% url 'core:logout' %}"> Deconnexion </a></li>

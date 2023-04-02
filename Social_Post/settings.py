@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-$^_b--x!!mr+$$128he6i)k1t78!jrkzogcfzd$x07r0a_f0%a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -64,6 +64,7 @@ WSGI_APPLICATION = "Social_Post.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#Migration de la base de donnee vers MySQl en preparation
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -106,13 +107,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+#Url vers le dossier des fichiers statiques pour les app
 STATIC_URL = "static/"
+
+#Chemin a specifier pour indiquer ou se trouve les fichier statiques en production
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+#Chemin a specifier pour les fichiers statiques ne se trouvant pas dans une app precise en Developement
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "static",
 ]
 
+#Url vers le dossier "media" en production
 MEDIA_URL = "/media/"
+
+#C'est ici que serons sauvegarder les media uploader par les utilisateur production(image,document,audio..etc)
 MEDIA_ROOT = BASE_DIR / "media/"
 
 

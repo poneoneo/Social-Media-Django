@@ -13,7 +13,46 @@
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+<style>
+    .home{
+        text-decoration: underline;
 
+    }
+    .home:hover{
+        color: greenyellow;
+
+    }
+
+    .not-yet:hover{
+        color:black;
+        font-weight:bold;
+        background-color: red;
+        font-size: larger;
+        font-style: italic;
+    
+
+    }
+    .save{
+        background-color: green !important;
+    }
+    .save:hover{
+        font-size: larger ;
+        color: black;
+        font-style: cursive ;
+    }
+    .img-profile{
+        border-radius: 50% ; 
+        width: 100px; 
+        height : auto; 
+        margin: auto ; 
+        margin-bottom: 10px ;
+        max-width: 100%;
+    }
+    .img-profile:hover{
+        border-radius: 100%;
+        width: 50px;
+    }
+</style>
 </head>
 
 <body>
@@ -25,45 +64,54 @@
 
             <div class="container m-auto"> 
 
-                <p class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Salut, {{ user.username|lower}} </p>
-                <h5 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> <a href="/" class = "home" >Acceuille</a>/ Parametres</h5>
-                <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
+                {% comment %} <p class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Salut, {{ user.username|lower}} </p> {% endcomment %}
+                <h5 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> <a href="/" class = "home" >Acceuille</a>/ Parametres de {{ user.username|lower}}</h5>
+                {% comment %} <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
                     <li class="uk-active"><a href="#">General</a></li>
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Notification</a></li>
                     <li><a href="#">Social links</a></li>
                     <li><a href="#">Billing</a></li>
-                    <li><a href="#">Security</a></li>
-                </ul>
+                    <li><a href="#">Security</a></li> 
+                </ul> {% endcomment %}
+                <br>
+                <hr>
 
                 <div class="grid lg:grid-cols-3 mt-12 gap-8">
                     <div>
-                        <h3 class="text-xl mb-2"> Basic</h3>
+                        <h3 class="text-xl mb-2">General</h3>
                         <p></p>
                     </div>
                     <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
-    
+                    <form action="/", method = "post", enctype="multipart/form-data">
+                        {% csrf_token %}
                        <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
-                           <div>
+                           {% comment %} <div>
                                <label for=""> Prenom</label>
                                <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
-                           </div>
-                           <div>
+                           </div> {% endcomment %}
+                           {% comment %} <div>
                                <label for=""> Nom</label>
                                <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
                             </div>
                             <div class="col-span-2">
                                 <label for=""> Email</label>
                                 <input type="email" value= "{{ user.email }}" placeholder= "{{ user.email }}" class="shadow-none bg-gray-100">
+                            </div> {% endcomment %}
+                            
+                            <div class="col-span-2">
+                                <label for="image">Choisissez une photo de Profile </label>
+                                <img class = "img-profile" src="{{ user_set.profileimg.url }}" alt="photo de profile" >
+                                <input  type="file" name="image" id="image" placeholder="" class="shadow-none bg-gray-100">
                             </div>
                             <div class="col-span-2">
-                                <label for="about">Bio</label>  
-                                <textarea id="about" name="about" rows="3"  class="shadow-none bg-gray-100"></textarea>
+                                <label for="about">Decrivez vous en quelques lignes</label>  
+                                <textarea id="about" name="bio" rows="3"  class="shadow-none bg-gray-100"></textarea>
                             </div> 
                             <div class="col-span-2">
-                                <label for=""> Localisation</label>
-                                <input type="text" placeholder="" class="shadow-none bg-gray-100">
+                                <label for="location"> Localisation</label>
+                                <input type="text" name = "location" id="location" placeholder="" class="shadow-none bg-gray-100">
                             </div>
                             {% comment %} <div>
                                <label for=""> Working at</label>
@@ -81,10 +129,11 @@
                             </div> {% endcomment %}
                        </div> 
     
-                       <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                           <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Annuler  </button>
-                           <button type="button" class="button bg-blue-700"> Sauvegarder </button>
-                       </div>
+                        <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+                            <button class="p-2 px-4 rounded bg-gray-50 text-red-500 not-yet"> <a href="/">Plus tard</a>  </button>
+                            <button type="submit" class="button bg-blue-700 save "> Sauvegarder </button>
+                        </div>
+                    </form>
     
                     </div>
 

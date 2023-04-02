@@ -2,6 +2,7 @@
 from django.urls import path
 from . import views
 
+#Preciser un espace de nom pour les urls de l'app "core"
 app_name = "core"
 urlpatterns = [
     path("", views.index, name="index"),
